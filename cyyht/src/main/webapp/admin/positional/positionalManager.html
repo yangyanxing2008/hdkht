@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>职称管理</title>
+    <link rel="stylesheet" type="text/css" href="../style/global.css">
+    <link rel="stylesheet" type="text/css" href="..//fonts/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="../../css/pageNav.css">
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.SuperSlide.2.1.1.source.js"></script>
+    <script type="text/javascript" src="../js/zUI.js"></script>
+    <script type="text/javascript" src="../js/echarts.common.min.js"></script>
+    <script type="text/javascript" src="../js/My97DatePicker/WdatePicker.js"></script>
+    <script src="js/positional.js"></script>
+    <script src="../js/pageNav.js"></script>
+</head>
+<body>
+<div class="place">当前位置：<b>职称管理</b></div>
+<div class="pageMain">
+    <div class="title">
+        <div class="text">职称管理</div>
+        <!-- <div class="ico"><a class="lmjg" style="cursor:pointer"><i class="iconfont icon-jiegou"></i> 分类查询</a></div>
+         <div class="ico"><a class="lmjgqx" style="cursor:pointer"> 取消分类</a></div>-->
+    </div>
+    <div class="caozuo">
+        <div class="ico fl">
+            <ul>
+                <!--   <li><a href="#"><i class="iconfont icon-icon-xiugai"></i> 编辑</a></li> -->
+                <li><a href="#" onclick="add();"><i class="iconfont icon-shanchu1"></i>添加</a></li>
+                <!--<li><a class="dc" style="cursor:pointer"><i class="iconfont icon-htmal5icon18"></i> 导出</a></li>-->
+                <!-- <li><a class="pl" style="cursor:pointer"><i class="iconfont icon-shangchuan"></i> 批量导入</a></li> -->
+            </ul>
+        </div>
+        <!--<div class="ico fl">
+            <select style="height: 32px;border: 1px solid #CCC;border-radius: 5px;">
+                <option value ="nickName">名称</option>
+
+                <option value=""　selected>请选择</option>
+            </select>
+        </div>
+        <div>
+            <div class="textInput"><input type="text" placeholder="请输入关键字" class="inputs" id="searchText"  style="margin-left: 10px;border-radius: 5px;"></div>
+            <div id="cpsearch" style="border: 1px solid #CCC;    height: 30px;    width: 60px; margin-left: 20px;   line-height: 30px;    float: left;"><i class="iconfont icon-sousuo" style="margin-left: 8px;"></i>搜索</div>
+        </div>-->
+    </div>
+    <p class="clear"></p>
+</div>
+<div class="tableMain" style="margin-top:20px;margin-left:10px;">
+    <table width="90%" border="1" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr style="font-size: 14px; font-weight: bold;">
+            <!--<td width="4%" height="50" align="center" bgcolor="#F2F2F2"><input type="checkbox" id="checkAll" onclick="checkAll()" /></td>-->
+            <td width="4%" height="50" align="center" bgcolor="#F2F2F2">序号</td>
+            <td width="10%" height="50" align="center" bgcolor="#F2F2F2">名称</td>
+            <td width="20%" height="50" align="center" bgcolor="#F2F2F2">操作</td>
+        </tr>
+        </thead>
+        <tbody  id="listShow"></tbody>
+    </table>
+</div>
+<div class="pages"><li class="text totalNum" style="margin-left: 40px;margin-top: 10px;"></li><nav aria-label="Page navigation" class="page-nav-outer" id="PageNavId"></nav>
+</div>
+</div>
+<!--footer-->
+<!--删除提示-->
+<div class="modelDel" style="display: none">
+    <div class="content">
+        <div class="pic">
+            <i class="iconfont icon-shanchu1"></i>
+        </div>
+        <div class="text">确定删除所选数据？</div>
+        <div class="close"><a href="#">×</a></div>
+    </div>
+    <div class="submit">
+        <ul>
+            <li class="on"><a href="#" class="subdel">确 定</a></li>
+            <li><a href="#" class="undel">取 消</a></li>
+        </ul>
+    </div>
+</div>
+<!--删除提示 end-->
+<!--删除成功-->
+<div class="modelSuccess" style="display: none">
+    <div class="pic">
+        <i class="iconfont icon-shanchu1"></i>
+    </div>
+    <div class="text">删除成功</div>
+</div>
+<!--删除成功 end-->
+
+<!--添加职称管理-->
+<div class="addE" style="display:none">
+    <div class="modelAskBg"></div>
+    <div class="modelAskMain" style="height: 310px;">
+        <div class="title">添加职称 <div class="close closeX"><a href="javascript:void(0);" onclick="">×</a></div></div>
+        <div class="content"  style="height: 100px;overflow-y: hidden;">
+
+            <div class="textArea" id="r1" style="height: 40px;margin-top: 20px;" >
+                <input id="positionalContent" style="height:40px;width: 100%;border: 0px;margin-left: 10px;"/>
+            </div>
+
+        </div>
+        <div class="submit" style="margin-top: 100px;">
+            <ul>
+                <li class="on" onclick="addDepart(1);">
+                    <a href="#">
+                        <i class="iconfont icon-emizhifeiji"></i> 添 加
+                    </a>
+                </li>
+                <li class="closeX">
+                    <a href="" >
+                        <i class="iconfont icon-guanbi"></i> 取消
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--添加职称end-->
+
+<!--修改职称管理-->
+<div class="updateE" style="display:none">
+    <div class="modelAskBg"></div>
+    <div class="modelAskMain" style="height: 310px;">
+        <div class="title">修改职称 <div class="close closeX"><a href="javascript:void(0);" onclick="">×</a></div></div>
+        <div class="content"  style="height: 100px;overflow-y: hidden;">
+
+            <div class="textArea" id="r1" style="height: 40px;margin-top: 20px;" >
+                <input id="positionalName" style="height:40px;width: 100%;border: 0px;margin-left: 10px;"/>
+            </div>
+
+        </div>
+        <div class="submit" style="margin-top: 100px;">
+            <ul>
+                <li class="on" onclick="updateDepart();">
+                    <a href="#">
+                        <i class="iconfont icon-emizhifeiji"></i> 修改
+                    </a>
+                </li>
+                <li class="closeX">
+                    <a href="" >
+                        <i class="iconfont icon-guanbi"></i> 取消
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--修改职称管理 end-->
+</body>
+</html>

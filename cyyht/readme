@@ -1,0 +1,14 @@
+2018.7.23最新修改联想词与栏目名称相同的，去掉联想词（以上是执行删除联想词中相关数据）
+DELETE FROM IndividualWord WHERE I_ID in (SELECT i.I_ID FROM IndividualWord i where i.I_TITLE in (SELECT c.CHNLNAME FROM CHANNELS c))
+
+2018.7.25知识点分类增加滚动条，批量上传模板修改。
+
+2018.8.2
+添加单元测试方法
+添加依赖
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${springVersion}</version>
+            <scope>test</scope>
+        </dependency>
